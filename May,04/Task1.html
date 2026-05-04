@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Hero</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0b0f2a, #1a1f5c);
+  color: white;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background-color: #1a1f5c;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff4d6d;
+}
+
+nav a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+nav a:hover,
+nav .active {
+  color: #ff4d6d;
+}
+
+.btn-outline {
+  border: 1px solid #ff4d6d;
+  background: transparent;
+  color: #ff4d6d;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 60px;
+  min-height: 90vh;
+}
+
+.hero-content {
+  max-width: 500px;
+}
+
+.hero-content h1 {
+  font-size: 42px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  color: #aaa;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #ff4d6d, #ff7a18);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+}
+
+/* IMAGE */
+.hero-image img {
+  width: 500px;
+}
+
+  .hero-image img {
+    margin-top: 25px;
+    margin-right: 250px;
+  }
+
+  /* --- MARKET TABLE --- */
+        .market-section {
+            padding: 80px 0;
+            background-color: #130c28;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .table-container {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        td {
+            padding: 20px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .coin-name { display: flex; align-items: center; gap: 10px; font-weight: 600;}
+        .green { color: #00e676; }
+        .red { color: #ff1744; }
+
+         /* ===== CRYPTO SECTION ===== */
+.crypto-section {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f9fafc;
+}
+
+.section-title {
+  font-size: 28px;
+  color: #f4f1f1;
+  margin-bottom: 40px;
+}
+
+/* ===== FEATURES LAYOUT ===== */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: #fff;
+  padding: 30px 20px;
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* ===== ICON ===== */
+.card img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+/* ===== TEXT ===== */
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+/* ===== SECTION ===== */
+.download-section {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: #fff;
+}
+
+/* ===== CONTAINER ===== */
+.download-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* ===== TEXT SIDE ===== */
+.download-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.download-text h4 {
+  font-size: 18px;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+.download-text h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.download-text p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+/* ===== STORE BUTTONS ===== */
+.store-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.store-buttons img {
+  width: 140px;
+  height: auto;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.store-buttons img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== IMAGE SIDE ===== */
+.download-image {
+  flex: 1;
+  text-align: center;
+  min-width: 300px;
+}
+
+.download-image img {
+  width: 100%;
+  max-width: 350px;
+  object-fit: contain;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .download-text h1 {
+    font-size: 32px;
+  }
+
+  .download-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .store-buttons {
+    justify-content: center;
+  }
+}
+        .learn-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f8f9fb;
+}
+
+.learn-section h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #ddd; /* shows placeholder if empty */
+}
+
+.card h3 {
+  font-size: 18px;
+  margin: 15px;
+  color: #222;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin: 0 15px 15px;
+  line-height: 1.5;
+}
+
+.card span {
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin: 0 15px 15px;
+}
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #110726;
+            padding: 60px 0 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .newsletter-box {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .input-group {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .col h4 { color: white; margin-bottom: 20px; font-size: 15px; }
+        .col ul li { margin-bottom: 10px; }
+        .col ul li a { color: var(--text-muted); font-size: 13px; }
+        .col ul li a:hover { color: var(--accent-purple); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content, .app-content, .grid-3, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links { display: none; }
+            .hero-img { order: -1; margin-bottom: 30px; }
+            .hero-text h1 { font-size: 32px; text-align: center; }
+            .hero-text p { text-align: center; margin: 0 auto 30px; }
+        }
+        
+        /* Animation Class */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+  
+</style>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">Cryptous</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Company</a>
+    <a href="#">About</a>
+    <a href="#">Pricing</a>
+    <a href="#">Team</a>
+    <a href="#">Contact</a>
+    <a href="#" class="active">Blog</a>
+  </nav>
+  <button class="btn-outline">Trade Now</button>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Make better business <br> with Cryptocurrency</h1>
+    <p>
+      We offer users a fully operational long-term rental platform.
+      <br>It leverages blockchain technology.
+    </p>
+    <button class="btn-primary">Get Whitelisted</button>
+  </div>
+
+  <div class="hero-image">
+    <img src="https://connect.theoppty.com/media/message_files/2026/05/04/illu.png" alt="crypto">
+  </div>
+</section>
+
+<!-- Data Table -->
+    <section class="market-section">
+        <div class="container fade-in">
+            <h2 class="section-title">Today's Cryptocurrency Prices</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Change</th>
+                            <th>Volume</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="coin-name"> Bitcoin</div></td>
+                            <td>$43,200.50</td>
+                            <td class="green">+2.4%</td>
+                            <td>$24B</td>
+                            <td><a href="#" style="color:#a076ff">Buy</a></td>
+                        </tr>
+                        <tr>
+                            <td><div class="coin-name"> Ethereum</div></td>
+                            <td>$2,250.20</td>
+                            <td class="green">+1.2%</td>
+                            <td>$12B</td>
+                            <td><a href="#" style="color:#a076ff">Buy</a></td>
+                        </tr>
+                        <tr>
+                            <td><div class="coin-name">Tether</div></td>
+                            <td>$1.00</td>
+                            <td class="red">-0.01%</td>
+                            <td>$30B</td>
+                            <td><a href="#" style="color:#a076ff">Buy</a></td>
+                        </tr>
+                        <tr>
+                            <td><div class="coin-name"> BNB</div></td>
+                            <td>$310.40</td>
+                            <td class="green">+0.5%</td>
+                            <td>$1.1B</td>
+                            <td><a href="#" style="color:#a076ff">Buy</a></td>
+                        </tr>
+                        <tr>
+                            <td><div class="coin-name"> Solana</div></td>
+                            <td>$98.50</td>
+                            <td class="red">-1.5%</td>
+                            <td>$2.1B</td>
+                            <td><a href="#" style="color:#a076ff">Buy</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+  <div class="crypto-section">
+  <h2 class="section-title">The most trusted cryptocurrency platform</h2>
+
+  <div class="features">
+
+    <!-- CARD 1 -->
+    <div class="card">
+      <img src="https://www.bing.com/th/id/OIP.lyAFyFyn4R2_T22RxART_AHaEo?w=193&h=135&c=8&rs=1&qlt=90&r=0&o=6&dpr=1.3&pid=3.1&rm=2" alt="icon">
+      <h3>Ease of Trading</h3>
+      <p>
+        Intuitive interface<br>
+        Instant deposit options<br>
+        Cash out directly to your bank account
+      </p>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card">
+      <img src="https://www.bing.com/th/id/OIP.R9rXMxBGir-8oPoMDVlzXgHaHa?w=193&h=193&c=8&rs=1&qlt=90&r=0&o=6&dpr=1.3&pid=3.1&rm=2" alt="icon">
+      <h3>Institutional-grade Security</h3>
+      <p>
+        98% of assets stored safely offline<br>
+        Highly encrypted personal data<br>
+        Whitelisting and confirmations
+      </p>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card">
+      <img src="https://th.bing.com/th/id/OIP.jRDwkB9blrXaBwx-xq0rpQHaE8?w=254&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="icon">
+      <h3>Proven Reliability</h3>
+      <p>
+        Exchanging bitcoin since 2011<br>
+        Industry-leading uptime<br>
+        24/7 dedicated support
+      </p>
+    </div>
+
+  </div>
+<section class="download-section">
+  
+  <div class="download-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="download-text">
+      <h4>Try the future, today.</h4>
+      <h1>Download Crypto</h1>
+
+      <p>
+        Stay connected to the market with our mobile app. Featuring advanced
+        order types and analytical tools for experienced traders, as well as a
+        simple buy & sell interface for those just getting started.
+      </p>
+
+      <!-- BUTTON IMAGES -->
+      <div class="store-buttons">
+        <img src="" alt="App Store">
+        <img src="" alt="Google Play">
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="download-image">
+      <img src="https://connect.theoppty.com/media/message_files/2026/05/04/phone.png" alt="Mobile App">
+    </div>
+
+  </div>
+
+</section>
+
+    <section class="learn-section">
+  <h2>Learn to thrive</h2>
+
+  <div class="card-container">
+
+    <!-- Card 1 -->
+    <div class="card">
+      <img src="https://user10276.na.imgto.link/public/20260504/1000217941.avif" alt="image1">
+      <h3>New Leveraged Pairs Added</h3>
+      <p>
+        We urge everyone adopt good cybersecurity habits, and use unique passwords...
+      </p>
+      <span>By: Jenna Peris | 15/07/2021 | 5 Min read</span>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <img src="https://user10276.na.imgto.link/public/20260504/1000217943.avif" alt="image2">
+      <h3>Understanding Bitcoin</h3>
+      <p>
+        Learn how Bitcoin works and why it's reshaping the financial industry...
+      </p>
+      <span>By: John Smith | 12/07/2021 | 7 Min read</span>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <img src="https://user10276.na.imgto.link/public/20260504/1000217937-1.avif" alt="image3">
+      <h3>Future of Crypto</h3>
+      <p>
+        Experts discuss the potential of blockchain and cryptocurrency for global trade...
+      </p>
+      <span>By: Sarah Lee | 10/07/2021 | 6 Min read</span>
+    </div>
+
+  </div>
+</section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container fade-in">
+            <div class="newsletter-box">
+                <h3>Sign up for email</h3>
+                <p>Stay updated with the latest market news and exclusive offers.</p>
+                <div class="input-group">
+                    <input type="email" placeholder="Enter your email address">
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </div>
+
+            <div class="footer-grid">
+                <div class="col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Consulting</a></li>
+                        <li><a href="#">Hosting</a></li>
+                        <li><a href="#">Domain</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Legal</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Socials</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Animations -->
+    <script>
+        // Simple Intersection Observer to handle fade-in animations on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
+
+https://user10276.na.imgto.link/public/20260504/1000217937-1.avif
