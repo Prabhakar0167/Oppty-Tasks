@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Snake Game</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+            color: white;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            color: #e94560;
+            text-shadow: 0 0 10px #e94560;
+        }
+        .scores {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        .scores span {
+            padding: 5px 15px;
+            background: #16213e;
+            border: 2px solid #0f3460;
+            border-radius: 20px;
+        }
+        #score { color: #00ff88; }
+        #best  { color: #ffd700; }
+        canvas {
+            background: #0f3460;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+        #message {
+            margin-top: 12px;
+            font-size: 16px;
+            color: #aaa;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+<h1>🐍 SNAKE</h1>
+<div class="scores">
+    <span>🍎 Score: <b id="score">0</b></span>
+    <span>🏆 Best: <b id="best">0</b></span>
+</div>
+<canvas id="canvas" width="400" height="400"></canvas>
+<div id="message">Press any Arrow Key or WASD to start</div>
+<script>
+// --- Elements ---
+const canvas  = document.getElementById("canvas");
+const ctx     = canvas.getContext("2d");
+const scoreEl = document.getElementById("score");
+const bestEl  = document.getElementById("best");
+const msgEl   = document.getElementById("message");
+// --- Constants ---
+const TILE  = 20;
+const GRID  = canvas.width / TILE;
+const FRUITS = ["🍎","🍊","🍇","🍓","🍒","🍑"];
+// --- Game variables ---
+let snake, direction, fruit, fruitIcon;
+let score, highScore = 0, speed;
+let playing, gameOver, loop;
+function init() {
+    snake     = [{ x:10, y:10 }, { x:9, y:10 }, { x:8, y:10 }];
+    direction = { x:0, y:0 };
+    score     = 0;
+    speed     = 8;
+    playing   = false;
+    gameOver  = false;
+    scoreEl.textContent = 0;
+    msgEl.textContent   = "Press any Arrow Key or WASD to start";
+    msgEl.style.color   = "#aaa";
+    placeFruit();
+    draw();
+}
+function placeFruit() {
+    do {
+        fruit = {
+            x: Math.floor(Math.random() * GRID),
+            y: Math.floor(Math.random() * GRID)
+        };
+    } while (snake.some(s => s.x === fruit.x && s.y === fruit.y));
+    fruitIcon = FRUITS[Math.floor(Math.random() * FRUITS.length)];
+}
+function update() {
+    if (!playing) return;
+    const head = {
+        x: snake[0].x + direction.x,
+        y: snake[0].y + direction.y
+    };
+    const hitWall = head.x < 0 || head.x >= GRID || head.y < 0 || head.y >= GRID;
+    const hitSelf = snake.some(s => s.x === head.x && s.y === head.y);
+    if (hitWall || hitSelf) { endGame(); return; }
+    snake.unshift(head);
+    if (head.x === fruit.x && head.y === fruit.y) {
+        score += 10;
+        scoreEl.textContent = score;
+        if (score % 30 === 0 && speed < 20) {
+            speed++;
+            startLoop();
+        }
+        placeFruit();
+    } else {
+        snake.pop();
+    }
+    draw();
+}
+function draw() {
+    ctx.fillStyle = "#0f3460";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(255,255,255,0.03)";
+    for (let x = 0; x < GRID; x++)
+        for (let y = 0; y < GRID; y++) {
+            ctx.beginPath();
+            ctx.arc(x * TILE + TILE / 2, y * TILE + TILE / 2, 1, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    snake.forEach((seg, i) => {
+        const brightness = 1 - (i / snake.length) * 0.6;
+        ctx.fillStyle = i === 0
+            ? "#00ff88"
+            : `rgb(0, ${Math.floor(200 * brightness)}, 50)`;
+        ctx.shadowColor = i === 0 ? "#00ff88" : "transparent";
+        ctx.shadowBlur  = i === 0 ? 10 : 0;
+        fillRoundedRect(seg.x * TILE + 1, seg.y * TILE + 1, TILE - 2, TILE - 2, 5);
+        ctx.shadowBlur = 0;
+    });
+    drawEyes(snake[0]);
+    ctx.font = "16px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(fruitIcon, fruit.x * TILE + TILE / 2, fruit.y * TILE + TILE / 2);
+}
+function fillRoundedRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y,     x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x,     y + h, r);
+    ctx.arcTo(x,     y + h, x,     y,     r);
+    ctx.arcTo(x,     y,     x + w, y,     r);
+    ctx.closePath();
+    ctx.fill();
+}
+function drawEyes(head) {
+    const cx = head.x * TILE + TILE / 2;
+    const cy = head.y * TILE + TILE / 2;
+    let offsets;
+    if      (direction.x ===  1) offsets = [[ 4,-4],[ 4, 4]];
+    else if (direction.x === -1) offsets = [[-4,-4],[-4, 4]];
+    else if (direction.y === -1) offsets = [[-4,-4],[ 4,-4]];
+    else if (direction.y ===  1) offsets = [[-4, 4],[ 4, 4]];
+    else                         offsets = [[-3,-2],[ 3,-2]];
+    offsets.forEach(([ox, oy]) => {
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.arc(cx + ox, cy + oy, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.arc(cx + ox, cy + oy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+    });
+}
+function startLoop() {
+    clearInterval(loop);
+    loop = setInterval(update, 1000 / speed);
+}
+function startGame() {
+    if (playing) return;
+    playing = true;
+    msgEl.textContent = "🎮 Playing — don't hit the walls!";
+    msgEl.style.color = "#00ff88";
+    startLoop();
+}
+function endGame() {
+    playing  = false;
+    gameOver = true;
+    clearInterval(loop);
+    if (score > highScore) {
+        highScore = score;
+        bestEl.textContent = highScore;
+    }
+    msgEl.textContent = "💀 Game Over! Press SPACE to play again";
+    msgEl.style.color = "#e94560";
+    ctx.fillStyle = "rgba(0,0,0,0.7)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#e94560"; ctx.font = "bold 36px Courier New";
+    ctx.fillText("GAME OVER", 200, 160);
+    ctx.fillStyle = "#00ff88"; ctx.font = "22px Courier New";
+    ctx.fillText("Score: " + score, 200, 200);
+    ctx.fillStyle = "#ffd700";
+    ctx.fillText("Best: " + highScore, 200, 232);
+    ctx.fillStyle = "#aaa";   ctx.font = "14px Courier New";
+    ctx.fillText("Press SPACE to restart", 200, 280);
+}
+document.addEventListener("keydown", e => {
+    const key = e.key;
+    if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(key)) {
+        e.preventDefault();
+    }
+    if (key === " ") {
+        if (gameOver || !playing) init();
+        return;
+    }
+    const moves = {
+        ArrowUp:    { x: 0, y:-1 }, w: { x: 0, y:-1 },
+        ArrowDown:  { x: 0, y: 1 }, s: { x: 0, y: 1 },
+        ArrowLeft:  { x:-1, y: 0 }, a: { x:-1, y: 0 },
+        ArrowRight: { x: 1, y: 0 }, d: { x: 1, y: 0 }
+    };
+    const move = moves[key];
+    if (!move) return;
+    if (move.x === -direction.x && move.y === -direction.y) return;
+    direction = move;
+    if (!playing && !gameOver) startGame();
+});
+init();
+</script>
+</body>
+</html>
